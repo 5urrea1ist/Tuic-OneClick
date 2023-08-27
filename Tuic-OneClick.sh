@@ -32,7 +32,7 @@ echo ""
 
 # Install required packages
 sudo apt-get update > /dev/null 2>&1
-sudo apt-get install -y nano net-tools uuid-runtime wget > /dev/null 2>&1
+sudo apt-get install -y nano net-tools uuid-runtime curl > /dev/null 2>&1
 
 # Check for an existing installation
 if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
@@ -138,8 +138,8 @@ fi
     
 # Download and extract
 mkdir -p $INSTALL_DIR
-wget -P $INSTALL_DIR -O tuic-server https://github.com/EAimTY/tuic/releases/download/tuic-server-1.0.0/tuic-server-1.0.0-x86_64-unknown-linux-gnu
-chmod 755 tuic-server
+curl -sL https://github.com/EAimTY/tuic/releases/download/tuic-server-1.0.0/tuic-server-1.0.0-x86_64-unknown-linux-gnu -o "$INSTALL_DIR/tuic-server"
+chmod 755 "$INSTALL_DIR/tuic-server"
 
 # Create config.json
 echo ""
