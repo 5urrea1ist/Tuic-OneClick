@@ -77,7 +77,7 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
         echo ""
         read -p "Choose your congestion_control [bbr/cubic/new_reno] (Default is bbr): " CON_CO
         if [ -z "CON_CO" ]; then
-            CON_CO=bbr
+            CON_CO="bbr"
         fi
         echo ""
 
@@ -161,7 +161,7 @@ echo ""
 
 read -p "Choose your congestion_control [bbr/cubic/new_reno] (Default is bbr): " CON_CO
 if [ -z "CON_CO" ]; then
-    CON_CO=bbr
+    CON_CO="bbr"
 fi
 
 # Generate keys
