@@ -26,7 +26,7 @@ construct_tuic_url() {
 # Introduction animation
 echo ""
 echo ""
-print_with_delay "tuic-installer by 5urrea1ist | @panjaho1 | Special Thanks to @iSegaro and @NamelessGhoul" 0.1
+print_with_delay "tuic-oneclick by 5urrea1ist | @panjaho1 | Special Thanks to @iSegaro and @NamelessGhoul" 0.1
 echo ""
 echo ""
 
@@ -70,6 +70,7 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
         fi
         echo ""
         read -p "Enter new UUID(Leave blank for generating a new one): " UUID
+        echo ""
         if [ -z "$UUID" ]; then
             UUID=$(uuidgen)
             echo "Generated UUID: $UUID"
@@ -152,6 +153,7 @@ if [[ -z "$PASSWORD" ]]; then
 fi
 echo ""
 read -p "Enter new UUID(Leave blank for generating a new one): " UUID
+echo ""
 if [ -z "$UUID" ]; then
     UUID=$(uuidgen)
     echo "Generated UUID: $UUID"
