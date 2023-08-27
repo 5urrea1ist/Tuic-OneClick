@@ -10,7 +10,7 @@ For using IPV6 you should adjust you APN to support IPV4/IPV6
 # 😺🚀 Quick Start
 
 ``` bash
-    bash <(curl -fsSL https://raw.githubusercontent.com/5urrea1ist/Tuic-OneClick/main/Tuic-OneClick.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/5urrea1ist/Tuic-OneClick/main/Tuic-OneClick.sh)
 
 ```
 

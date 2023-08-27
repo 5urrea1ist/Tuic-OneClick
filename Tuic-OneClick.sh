@@ -43,7 +43,7 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
     echo ""
     echo "2. Modify"
     echo ""
-    echo "2. Uninstall"
+    echo "3. Uninstall"
     echo ""
     read -p "Enter your choice (1/2/3): " choice
 
@@ -72,6 +72,7 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
         read -p "Enter new UUID(Leave blank for generating a new one): " UUID
         if [ -z "$UUID" ]; then
             UUID=$(uuidgen)
+            echo "Generated UUID: $UUID"
         fi 
         echo ""
         read -p "Choose your congestion_control [bbr/cubic/new_reno] (Default is bbr): " CON_CO
@@ -105,22 +106,18 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
 }
 EOL
 
-sudo systemctl start tuic
+        sudo systemctl start tuic
 
-SHARE_LINK_IPV4=$(construct_tuic_url "$UUID" "$PASSWORD" "$IP_V4" "$PORT" "$CON_CO" IPV4)
+        SHARE_LINK_IPV4=$(construct_tuic_url "$UUID" "$PASSWORD" "$IP_V4" "$PORT" "$CON_CO" IPV4)
 
-echo ""
-echo ""
-echo "Share link IPv4: $SHARE_LINK_IPV4"
-echo ""
-echo ""
-
-
-
-
-    exit 0
-    ;;
-    
+        echo ""
+        echo ""
+        echo "Share link IPv4: $SHARE_LINK_IPV4"
+        echo ""
+        echo ""
+        exit 0
+            ;;
+            
     3)
         sudo systemctl stop tuic
         sudo systemctl disable tuic > /dev/null 2>&1
@@ -157,7 +154,10 @@ fi
 read -p "Enter new UUID(Leave blank for generating a new one): " UUID
 if [ -z "$UUID" ]; then
     UUID=$(uuidgen)
+    echo "Generated UUID: $UUID"
 fi 
+
+echo ""
 
 read -p "Choose your congestion_control [bbr/cubic/new_reno] (Default is bbr): " CON_CO
 if [ -z "CON_CO" ]; then
@@ -197,7 +197,7 @@ EOL
 cat > $SERVICE_FILE <<EOL
 [Unit]
 Description=tuic service
-Documentation=by iSegaro made by 5urrea1ist
+Documentation=by iSegaro
 After=network.target nss-lookup.target
 
 [Service]
