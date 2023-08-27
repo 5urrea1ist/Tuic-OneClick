@@ -4,8 +4,7 @@
 INSTALL_DIR="/root/tuic"
 CONFIG_FILE="$INSTALL_DIR/config.json"
 SERVICE_FILE="/etc/systemd/system/tuic.service"
-IP_V4=$(ip -4 addr)
-IP_V6=$(ip -6 addr)
+IP_V4=$(curl -s ipinfo.io | grep -Po 'ip[^0-9]*"\K[^"]*')
 
 # Function to print characters with delay
 print_with_delay() {
@@ -46,7 +45,7 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
     echo ""
     echo "2. Uninstall"
     echo ""
-    read -p "Enter your choice (1/2): " choice
+    read -p "Enter your choice (1/2/3): " choice
 
     case $choice in
     1)
@@ -79,6 +78,7 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
         if [ -z "CON_CO" ]; then
             CON_CO=bbr
         fi
+        echo ""
 
         cat <<EOL > config.json
 {
@@ -108,16 +108,13 @@ EOL
 sudo systemctl start tuic
 
 SHARE_LINK_IPV4=$(construct_tuic_url "$UUID" "$PASSWORD" "$IP_V4" "$PORT" "$CON_CO" IPV4)
-SHARE_LINK_IPV6=$(construct_tuic_url "$UUID" "$PASSWORD" "$IP_V4" "$PORT" "$CON_CO" IPV6)
 
 echo ""
 echo ""
 echo "Share link IPv4: $SHARE_LINK_IPV4"
 echo ""
 echo ""
-echo "Share link IPv6: $SHARE_LINK_IPV6"
-echo ""
-echo ""
+
 
 
 
@@ -224,13 +221,9 @@ sudo systemctl start tuic
 
 # Modified share link output
 SHARE_LINK_IPV4=$(construct_tuic_url "$UUID" "$PASSWORD" "$IP_V4" "$PORT" "$CON_CO" IPV4)
-SHARE_LINK_IPV6=$(construct_tuic_url "$UUID" "$PASSWORD" "$IP_V4" "$PORT" "$CON_CO" IPV6)
 
 echo ""
 echo ""
 echo "Share link IPv4: $SHARE_LINK_IPV4"
-echo ""
-echo ""
-echo "Share link IPv6: $SHARE_LINK_IPV6"
 echo ""
 echo ""
