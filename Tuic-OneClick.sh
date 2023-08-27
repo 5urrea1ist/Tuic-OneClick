@@ -136,7 +136,33 @@ fi
     
 # Download and extract
 mkdir -p $INSTALL_DIR
-curl -sL https://github.com/EAimTY/tuic/releases/download/tuic-server-1.0.0/tuic-server-1.0.0-x86_64-unknown-linux-gnu -o "$INSTALL_DIR/tuic-server"
+# Detect Architecture
+ARCH=$(uname -m)
+PACKAGE_NAME="tuic-server-1.0.0"
+
+case "$ARCH" in
+    "x86_64")
+        PACKAGE_NAME="${PACKAGE_NAME}-x86_64-unknown-linux-gnu"
+        ;;
+    "armv7")
+        PACKAGE_NAME="${PACKAGE_NAME}-armv7-unknown-linux-gnueabi"
+        ;;
+    "aarch64")
+        PACKAGE_NAME="${PACKAGE_NAME}-aarch64-unknown-linux-gnu"
+        ;;
+    "i686")
+        PACKAGE_NAME="${PACKAGE_NAME}-i686-unknown-linux-gnu"
+        ;;
+    *)
+        echo "Unsupported architecture: $ARCH"
+        exit 1
+        ;;
+esac
+
+LATEST_RELEASE_URL="https://github.com/EAimTY/tuic/releases/download/tuic-server-1.0.0/${BINARY_NAME}"
+
+curl -sL ${LATEST_RELEASE_URL} -o "$INSTALL_DIR/tuic-server"
+
 chmod 755 "$INSTALL_DIR/tuic-server"
 
 # Create config.json
