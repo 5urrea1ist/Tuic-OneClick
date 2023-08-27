@@ -76,7 +76,7 @@ if [[ -d $INSTALL_DIR && -f $SERVICE_FILE ]]; then
         fi 
         echo ""
         read -p "Choose your congestion_control [bbr/cubic/new_reno] (Default is bbr): " CON_CO
-        if [ -z "CON_CO" ]; then
+        if [ -z "$CON_CO" ]; then
             CON_CO="bbr"
         fi
         echo ""
@@ -116,7 +116,7 @@ EOL
         echo ""
         echo ""
         exit 0
-            ;;
+        ;;
             
     3)
         sudo systemctl stop tuic
@@ -150,7 +150,7 @@ if [[ -z "$PASSWORD" ]]; then
     PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
     echo "Generated Password: $PASSWORD"
 fi
-
+echo ""
 read -p "Enter new UUID(Leave blank for generating a new one): " UUID
 if [ -z "$UUID" ]; then
     UUID=$(uuidgen)
@@ -160,7 +160,7 @@ fi
 echo ""
 
 read -p "Choose your congestion_control [bbr/cubic/new_reno] (Default is bbr): " CON_CO
-if [ -z "CON_CO" ]; then
+if [ -z "$CON_CO" ]; then
     CON_CO="bbr"
 fi
 
