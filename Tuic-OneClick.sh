@@ -144,7 +144,7 @@ case "$ARCH" in
     "x86_64")
         PACKAGE_NAME="${PACKAGE_NAME}-x86_64-unknown-linux-gnu"
         ;;
-    "armv7")
+    "armv7l")
         PACKAGE_NAME="${PACKAGE_NAME}-armv7-unknown-linux-gnueabi"
         ;;
     "aarch64")
@@ -222,15 +222,15 @@ cat > $CONFIG_FILE <<EOL
 EOL
 
 # Create systemd service file
-cat > $SERVICE_FILE <<EOL
+cat > /etc/systemd/system/tuic.service <<EOL
 [Unit]
 Description=tuic service
-Documentation=https://docs.rs/crate/tuic-server/latest
+Documentation=TUIC v5
 After=network.target nss-lookup.target
 
 [Service]
 User=root
-WorkingDirectory=/root
+WorkingDirectory=/root/tuic
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
 ExecStart=/root/tuic/tuic-server -c /root/tuic/config.json
