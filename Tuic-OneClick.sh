@@ -199,7 +199,7 @@ EOL
 cat > $SERVICE_FILE <<EOL
 [Unit]
 Description=tuic service
-Documentation=by iSegaro
+Documentation=https://docs.rs/crate/tuic-server/latest
 After=network.target nss-lookup.target
 
 [Service]
